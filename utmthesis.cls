@@ -1563,6 +1563,16 @@
   \@starttoc{toc}
 }
 
+% due to bug with landscape package, we need to manually call setcounter{tocdepth} in appendix
+% usage:
+% call the command after appendix
+% \appendix
+% \changelocaltocdepth{2}
+\newcommand{\changelocaltocdepth}[1]{%
+  % https://tex.stackexchange.com/a/395858/287244
+  \addtocontents{toc}{\string\save@tocdepth\protect\setcounter{tocdepth}{#1}}%
+  \setcounter{tocdepth}{#1}%
+}
 
 % ========================================
 %       [P12] List of Tables
